@@ -4,8 +4,18 @@
 
     <AddItemForm @add="item => items.push(item)" />
 
-    <div class="text-gray-600 tracking-wide text-sm uppercase text-center">
-      {{ counter }}
+    <div
+      class="flex justify-between items-center text-gray-600 tracking-wide text-sm uppercase"
+    >
+      {{ counterLabel }}
+
+      <Btn
+        variant="link"
+        :disabled="!boughtItemsLength"
+        @click="clearBoughtItems"
+      >
+        Clear bought items
+      </Btn>
     </div>
 
     <ul class="my-6 border-b border-gray-400">
@@ -55,9 +65,19 @@ export default {
   },
 
   computed: {
-    counter() {
+    counterLabel() {
       const length = this.items.length;
       return length === 1 ? '1 item' : `${length} items`;
+    },
+
+    boughtItemsLength() {
+      return this.items.filter(item => item.bought).length;
+    },
+  },
+
+  methods: {
+    clearBoughtItems() {
+      this.items = this.items.filter(item => !item.bought);
     },
   },
 };
