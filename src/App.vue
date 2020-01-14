@@ -33,15 +33,21 @@
         :key="i"
         class="py-2 border-t border-gray-400"
       >
-        {{ item.name }}
+        <ListItem :item="item" />
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import ListItem from '@/components/ListItem';
+
 export default {
   name: 'App',
+
+  components: {
+    ListItem,
+  },
 
   data() {
     return {
