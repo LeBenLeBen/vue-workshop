@@ -2,26 +2,7 @@
   <div id="app" class="p-4 mx-auto max-w-xl">
     <h1 class="text-4xl mb-6">Shopping list</h1>
 
-    <form
-      action=""
-      class="flex items-center p-4 mb-10 bg-white rounded shadow"
-      @submit.prevent="addItem"
-    >
-      <label for="item" class="sr-only">Item name</label>
-      <input
-        id="item"
-        v-model="form.name"
-        type="text"
-        class="flex-grow border border-gray-500 rounded py-2 px-4"
-        placeholder="Item name"
-      />
-      <button
-        type="submit"
-        class="ml-3 py-2 px-4 text-white font-semibold bg-blue-600 rounded"
-      >
-        Add
-      </button>
-    </form>
+    <AddItemForm @add="item => items.push(item)" />
 
     <div class="text-gray-600 tracking-wide text-sm uppercase text-center">
       {{ counter }}
@@ -44,19 +25,18 @@
 
 <script>
 import ListItem from '@/components/ListItem';
+import AddItemForm from '@/components/AddItemForm';
 
 export default {
   name: 'App',
 
   components: {
     ListItem,
+    AddItemForm,
   },
 
   data() {
     return {
-      form: {
-        name: '',
-      },
       items: [
         {
           name: 'Bananas',
@@ -78,20 +58,6 @@ export default {
     counter() {
       const length = this.items.length;
       return length === 1 ? '1 item' : `${length} items`;
-    },
-  },
-
-  methods: {
-    addItem() {
-      const name = this.form.name.trim();
-
-      if (!name) return;
-
-      this.items.push({
-        name,
-        bought: false,
-      });
-      this.form.name = '';
     },
   },
 };
