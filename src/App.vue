@@ -23,6 +23,10 @@
       </button>
     </form>
 
+    <div class="text-gray-600 tracking-wide text-sm uppercase text-center">
+      {{ counter }}
+    </div>
+
     <ul class="my-6 border-b border-gray-400">
       <li
         v-for="(item, i) in items"
@@ -56,6 +60,13 @@ export default {
         },
       ],
     };
+  },
+
+  computed: {
+    counter() {
+      const length = this.items.length;
+      return length === 1 ? '1 item' : `${length} items`;
+    },
   },
 
   methods: {
