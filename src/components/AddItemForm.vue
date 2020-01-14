@@ -4,16 +4,16 @@
     class="flex items-center p-4 mb-10 bg-white rounded shadow"
     @submit.prevent="addItem"
   >
-    <label for="item" class="sr-only">Item name</label>
+    <label for="item" class="sr-only">{{ $t('form.name') }}</label>
     <input
       id="item"
       v-model="name"
       type="text"
       class="flex-grow border border-gray-500 rounded py-2 px-4"
-      placeholder="Item name"
+      :placeholder="$t('form.name')"
     />
     <Btn type="submit" variant="primary" class="ml-3">
-      Add
+      {{ $t('form.add') }}
     </Btn>
   </form>
 </template>

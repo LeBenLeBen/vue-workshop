@@ -1,0 +1,13 @@
+{
+  "app": {
+    "title": "Shopping list"
+  },
+  "list": {
+    "clear": "Clear bought items",
+    "counter": "No items | 1 item | {count} items"
+  },
+  "form": {
+    "name": "Item name",
+    "add": "Add"
+  }
+}

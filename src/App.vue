@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="p-4 mx-auto max-w-xl">
-    <h1 class="text-4xl mb-6">Shopping list</h1>
+    <h1 class="text-4xl mb-6">{{ $t('app.title') }}</h1>
 
     <AddItemForm @add="item => items.push(item)" />
 
@@ -8,14 +8,14 @@
       <div
         class="flex justify-between items-center text-gray-600 tracking-wide text-sm uppercase"
       >
-        {{ counterLabel }}
+        {{ $tc('list.counter', items.length, { count: items.length }) }}
 
         <Btn
           variant="link"
           :disabled="!boughtItemsLength"
           @click="clearBoughtItems"
         >
-          Clear bought items
+          {{ $t('list.clear') }}
         </Btn>
       </div>
 
@@ -67,11 +67,6 @@ export default {
   },
 
   computed: {
-    counterLabel() {
-      const length = this.items.length;
-      return length === 1 ? '1 item' : `${length} items`;
-    },
-
     boughtItemsLength() {
       return this.items.filter(item => item.bought).length;
     },
