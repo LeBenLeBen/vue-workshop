@@ -4,32 +4,34 @@
 
     <AddItemForm @add="item => items.push(item)" />
 
-    <div
-      class="flex justify-between items-center text-gray-600 tracking-wide text-sm uppercase"
-    >
-      {{ counterLabel }}
-
-      <Btn
-        variant="link"
-        :disabled="!boughtItemsLength"
-        @click="clearBoughtItems"
+    <template v-if="items.length">
+      <div
+        class="flex justify-between items-center text-gray-600 tracking-wide text-sm uppercase"
       >
-        Clear bought items
-      </Btn>
-    </div>
+        {{ counterLabel }}
 
-    <ul class="my-6 border-b border-gray-400">
-      <li
-        v-for="(item, i) in items"
-        :key="i"
-        class="py-2 border-t border-gray-400"
-      >
-        <ListItem
-          :item="item"
-          @toggleBought="bought => (item.bought = bought)"
-        />
-      </li>
-    </ul>
+        <Btn
+          variant="link"
+          :disabled="!boughtItemsLength"
+          @click="clearBoughtItems"
+        >
+          Clear bought items
+        </Btn>
+      </div>
+
+      <ul class="my-6 border-b border-gray-400">
+        <li
+          v-for="(item, i) in items"
+          :key="i"
+          class="py-2 border-t border-gray-400"
+        >
+          <ListItem
+            :item="item"
+            @toggleBought="bought => (item.bought = bought)"
+          />
+        </li>
+      </ul>
+    </template>
   </div>
 </template>
 
