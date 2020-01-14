@@ -1,13 +1,13 @@
 <template>
   <div>
-    <button
-      type="button"
-      class="block w-full text-left"
-      :class="{ 'line-through text-gray-600': item.bought }"
+    <Btn
+      class="text-left hover:line-through"
+      :class="{ 'line-through text-gray-500': item.bought }"
+      block
       @click="toggleBought"
     >
       {{ item.name }}
-    </button>
+    </Btn>
   </div>
 </template>
 
