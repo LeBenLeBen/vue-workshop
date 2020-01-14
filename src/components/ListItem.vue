@@ -1,6 +1,13 @@
 <template>
   <div>
-    {{ item.name }}
+    <button
+      type="button"
+      class="block w-full text-left"
+      :class="{ 'line-through text-gray-600': item.bought }"
+      @click="toggleBought"
+    >
+      {{ item.name }}
+    </button>
   </div>
 </template>
 
@@ -10,6 +17,12 @@ export default {
     item: {
       type: Object,
       required: true,
+    },
+  },
+
+  methods: {
+    toggleBought() {
+      this.$emit('toggleBought', !this.item.bought);
     },
   },
 };

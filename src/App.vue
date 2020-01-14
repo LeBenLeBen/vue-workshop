@@ -33,7 +33,10 @@
         :key="i"
         class="py-2 border-t border-gray-400"
       >
-        <ListItem :item="item" />
+        <ListItem
+          :item="item"
+          @toggleBought="bought => (item.bought = bought)"
+        />
       </li>
     </ul>
   </div>
@@ -57,12 +60,15 @@ export default {
       items: [
         {
           name: 'Bananas',
+          bought: false,
         },
         {
           name: 'Tofu',
+          bought: false,
         },
         {
           name: 'Milk',
+          bought: false,
         },
       ],
     };
@@ -83,6 +89,7 @@ export default {
 
       this.items.push({
         name,
+        bought: false,
       });
       this.form.name = '';
     },
