@@ -10,6 +10,17 @@ const routes = [
     name: 'home',
     component: Home,
   },
+  {
+    path: '/shopping-lists/:id',
+    name: 'shopping-list',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(
+        /* webpackChunkName: "shopping-list" */ '@/views/ShoppingList.vue'
+      ),
+  },
 ];
 
 const router = new VueRouter({

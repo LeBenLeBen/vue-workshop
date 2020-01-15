@@ -1,78 +1,32 @@
 <template>
-  <div>
-    <AddItemForm @add="item => items.push(item)" />
-
-    <template v-if="items.length">
-      <div
-        class="flex justify-between items-center text-gray-600 tracking-wide text-sm uppercase"
+  <ul class="my-6 border-b border-gray-400">
+    <li
+      v-for="(list, i) in lists"
+      :key="i"
+      class="py-2 border-t border-gray-400"
+    >
+      <RouterLink
+        :to="{ name: 'shopping-list', params: { id: list.id } }"
+        class="block"
       >
-        {{ $tc('list.counter', items.length, { count: items.length }) }}
-
-        <Btn
-          variant="link"
-          :disabled="!boughtItemsLength"
-          @click="clearBoughtItems"
-        >
-          {{ $t('list.clear') }}
-        </Btn>
-      </div>
-
-      <ul class="my-6 border-b border-gray-400">
-        <li
-          v-for="(item, i) in items"
-          :key="i"
-          class="py-2 border-t border-gray-400"
-        >
-          <ListItem
-            :item="item"
-            @toggleBought="bought => (item.bought = bought)"
-          />
-        </li>
-      </ul>
-    </template>
-  </div>
+        {{ list.label }}
+        <div class="text-gray-600 text-sm">
+          {{
+            $tc('list.counter', list.items.length, { count: list.items.length })
+          }}
+        </div>
+      </RouterLink>
+    </li>
+  </ul>
 </template>
 
 <script>
-import ListItem from '@/components/ListItem';
-import AddItemForm from '@/components/AddItemForm';
-
 export default {
-  name: 'App',
-
-  components: {
-    ListItem,
-    AddItemForm,
-  },
-
-  data() {
-    return {
-      items: [
-        {
-          name: 'Bananas',
-          bought: false,
-        },
-        {
-          name: 'Tofu',
-          bought: false,
-        },
-        {
-          name: 'Milk',
-          bought: false,
-        },
-      ],
-    };
-  },
+  name: 'Home',
 
   computed: {
-    boughtItemsLength() {
-      return this.items.filter(item => item.bought).length;
-    },
-  },
-
-  methods: {
-    clearBoughtItems() {
-      this.items = this.items.filter(item => !item.bought);
+    lists() {
+      return this.$store.state.lists;
     },
   },
 };
