@@ -21,6 +21,12 @@ const routes = [
         /* webpackChunkName: "shopping-list" */ '@/views/ShoppingList.vue'
       ),
   },
+  {
+    path: '*',
+    name: 'not-found',
+    component: () =>
+      import(/* webpackChunkName: "not-found" */ '@/views/NotFound.vue'),
+  },
 ];
 
 const router = new VueRouter({
