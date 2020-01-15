@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import store from '@/store';
+
 import ListItem from '@/components/ListItem';
 import AddItemForm from '@/components/AddItemForm';
 
@@ -45,6 +47,14 @@ export default {
   components: {
     ListItem,
     AddItemForm,
+  },
+
+  beforeRouteEnter: (to, from, next) => {
+    if (!store.state.lists[to.params.id]) {
+      next({ name: 'not-found', params: [to.path], replace: true });
+    } else {
+      next();
+    }
   },
 
   computed: {
